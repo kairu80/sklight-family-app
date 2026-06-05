@@ -3,27 +3,11 @@ import Calendar from './components/Calendar.jsx'
 import Chores from './components/Chores.jsx'
 import Stars from './components/Stars.jsx'
 import MonthlyChampion from './components/MonthlyChampion.jsx'
-import FirebaseSetup from './components/FirebaseSetup.jsx'
 import { useStore } from './useStore.js'
-import { isConfigured } from './firebase.js'
 
 export default function App() {
   const [view, setView] = useState('calendar')
-  // null = undecided, 'setup' = show setup, 'ready' = skip setup
-  const [setupState, setSetupState] = useState(() =>
-    isConfigured() ? 'ready' : null
-  )
   const store = useStore()
-
-  // First visit: show choice modal
-  if (setupState === null) {
-    return (
-      <FirebaseSetup
-        onDone={() => { window.location.reload() }}
-        onSkip={() => setSetupState('ready')}
-      />
-    )
-  }
 
   return (
     <div className="app">
@@ -48,16 +32,8 @@ export default function App() {
             ✅ Chores
           </button>
         </div>
-        {/* Cloud sync status indicator */}
         {store.ready && (
-          <div
-            title={store.fbOk ? 'Syncing to cloud' : 'Local only — click to configure cloud sync'}
-            onClick={() => !store.fbOk && setSetupState(null)}
-            style={{
-              marginLeft: 'auto', cursor: store.fbOk ? 'default' : 'pointer',
-              fontSize: '1rem', opacity: 0.7,
-            }}
-          >
+          <div title={store.fbOk ? 'Synced to cloud ☁️' : 'Saving locally only'} style={{ marginLeft: 'auto', fontSize: '1rem', opacity: 0.6 }}>
             {store.fbOk ? '☁️' : '💾'}
           </div>
         )}
