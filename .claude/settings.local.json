@@ -1,0 +1,34 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm create:*)",
+      "Bash(npm install:*)",
+      "Bash(npm run:*)",
+      "Bash(curl -s http://localhost:5173)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(pkill -f \"vite\")",
+      "Bash(pkill -f \"node server\")",
+      "Bash(node server.js)",
+      "Bash(curl -s http://localhost:3001/api/data)",
+      "Bash(npx vite:*)",
+      "Bash(curl -s http://localhost:5173/api/data)",
+      "Bash(lsof -ti:5173)",
+      "Bash(xargs kill:*)",
+      "Bash(/usr/libexec/ApplicationFirewall/socketfilterfw --getglobalstate)",
+      "Bash(curl -s --connect-timeout 3 http://192.168.4.21:5173)",
+      "Bash(curl -s --connect-timeout 3 http://192.168.4.21:3001/api/data)",
+      "Bash(pkill -f \"concurrently\")",
+      "Bash(curl -s http://localhost:3000/api/data)",
+      "Bash(curl -s http://192.168.4.21:3000)",
+      "Bash(ipconfig getifaddr *)",
+      "Bash(awk '{print $2}')",
+      "Bash(curl -s -X POST http://localhost:3000/api/reset -H \"Content-Type: application/json\")",
+      "Bash(launchctl stop *)",
+      "Bash(launchctl start *)",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\('OK — events:', len\\(d['events']\\)\\)\")",
+      "Bash(python3 -m json.tool)",
+      "Bash(pkill -f \"node server.js\")",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\('Server up, events:', len\\(d['events']\\)\\)\")"
+    ]
+  }
+}
