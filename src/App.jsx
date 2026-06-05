@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Calendar from './components/Calendar.jsx'
 import Chores from './components/Chores.jsx'
+import History from './components/History.jsx'
 import Stars from './components/Stars.jsx'
 import MonthlyChampion from './components/MonthlyChampion.jsx'
 import { useStore } from './useStore.js'
@@ -31,9 +32,15 @@ export default function App() {
           >
             ✅ Chores
           </button>
+          <button
+            className={`nav-tab ${view === 'history' ? 'active' : ''}`}
+            onClick={() => setView('history')}
+          >
+            🏆 History
+          </button>
         </div>
         {store.ready && (
-          <div title={store.fbOk ? 'Synced to cloud ☁️' : 'Saving locally only'} style={{ marginLeft: 'auto', fontSize: '1rem', opacity: 0.6 }}>
+          <div title={store.fbOk ? 'Synced to cloud' : 'Saving locally only'} style={{ marginLeft: 'auto', fontSize: '1rem', opacity: 0.6 }}>
             {store.fbOk ? '☁️' : '💾'}
           </div>
         )}
@@ -52,7 +59,7 @@ export default function App() {
             updateEvent={store.updateEvent}
             deleteEvent={store.deleteEvent}
           />
-        ) : (
+        ) : view === 'chores' ? (
           <Chores
             chores={store.chores}
             toggleChore={store.toggleChore}
@@ -65,6 +72,12 @@ export default function App() {
             koaPoints={store.koaPoints}
             addKoaPoints={store.addKoaPoints}
             addBonusPoints={store.addBonusPoints}
+          />
+        ) : (
+          <History
+            chores={store.chores}
+            koaPoints={store.koaPoints}
+            bonusPoints={store.bonusPoints}
           />
         )}
       </main>
