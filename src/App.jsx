@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Calendar from './components/Calendar.jsx'
 import Chores from './components/Chores.jsx'
 import History from './components/History.jsx'
+import Chat from './components/Chat.jsx'
 import Stars from './components/Stars.jsx'
 import MonthlyChampion from './components/MonthlyChampion.jsx'
 import { useStore } from './useStore.js'
@@ -38,6 +39,12 @@ export default function App() {
           >
             🏆 History
           </button>
+          <button
+            className={`nav-tab ${view === 'chat' ? 'active' : ''}`}
+            onClick={() => setView('chat')}
+          >
+            💬 Chat
+          </button>
         </div>
         {store.ready && (
           <div title={store.fbOk ? 'Synced to cloud' : 'Saving locally only'} style={{ marginLeft: 'auto', fontSize: '1rem', opacity: 0.6 }}>
@@ -73,12 +80,14 @@ export default function App() {
             addKoaPoints={store.addKoaPoints}
             addBonusPoints={store.addBonusPoints}
           />
-        ) : (
+        ) : view === 'history' ? (
           <History
             chores={store.chores}
             koaPoints={store.koaPoints}
             bonusPoints={store.bonusPoints}
           />
+        ) : (
+          <Chat />
         )}
       </main>
 
