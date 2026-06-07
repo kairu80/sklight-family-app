@@ -159,7 +159,12 @@ export default function Chat() {
   const member = FAMILY_MEMBERS.find(m => m.id === activeMember?.id)
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: 'calc(100vh - 56px)', maxWidth: 600, margin: '0 auto' }}>
+    <div style={{
+      display: 'flex', flexDirection: 'column',
+      height: 'calc(100vh - 58px)',   /* exactly the nav height from CSS */
+      maxWidth: 600, margin: '0 auto',
+      overflow: 'hidden',             /* keep input pinned at bottom */
+    }}>
 
       {/* Passcode overlay */}
       {pendingParent && (
@@ -240,7 +245,7 @@ export default function Chat() {
 
       {/* Messages */}
       {activeMember && (
-        <div style={{ flex: 1, overflowY: 'auto', padding: '0.75rem 1rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+        <div style={{ flex: 1, overflowY: 'auto', minHeight: 0, padding: '0.75rem 1rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
           {messages.length === 0 && (
             <div style={{ textAlign: 'center', color: '#334155', marginTop: '2rem', fontSize: '0.9rem' }}>
               {viewDate === today ? 'No messages yet today — say something! 👋' : 'No messages on this day.'}
@@ -284,6 +289,7 @@ export default function Chat() {
           padding: '0.75rem 1rem',
           background: '#13132a', borderTop: '1px solid #2a2a5a',
           display: 'flex', gap: '0.5rem', alignItems: 'flex-end',
+          flexShrink: 0,   /* never get squeezed off screen */
         }}>
           <textarea
             value={text}
@@ -318,6 +324,7 @@ export default function Chat() {
         <div style={{
           padding: '0.6rem 1rem', background: '#13132a', borderTop: '1px solid #2a2a5a',
           textAlign: 'center', color: '#64748b', fontSize: '0.85rem',
+          flexShrink: 0,
         }}>
           Viewing past messages — <button onClick={() => setViewDate(today)} style={{
             background: 'none', border: 'none', color: '#818cf8', cursor: 'pointer', fontWeight: 700,

@@ -53,7 +53,10 @@ export default function App() {
         )}
       </nav>
 
-      <main className="app-main">
+      {/* Chat gets its own full-height container outside app-main padding */}
+      {store.ready && view === 'chat' && <Chat />}
+
+      <main className="app-main" style={view === 'chat' ? { display: 'none' } : {}}>
         {!store.ready ? (
           <div className="loading-screen">
             <div className="loading-spinner" />
